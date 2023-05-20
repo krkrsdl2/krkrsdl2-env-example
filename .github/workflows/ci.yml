@@ -94,7 +94,7 @@
           "uses" : "actions/upload-artifact@master",
           "with" : {
             "name" : "krkrsdl2-web",
-            "path" : "build/krkrsdl2.wasm\nbuild/krkrsdl2.js\nbuild/index.html\n"
+            "path" : "build/krkrsdl2_repo/krkrsdl2.wasm\nbuild/krkrsdl2_repo/krkrsdl2.js\nbuild/krkrsdl2_repo/index.html\n"
           }
         }
       ]
@@ -137,7 +137,7 @@
           "uses" : "actions/upload-artifact@master",
           "with" : {
             "name" : "krkrsdl2-ubuntu",
-            "path" : "build/krkrsdl2"
+            "path" : "build/krkrsdl2_repo/krkrsdl2"
           }
         }
       ]
@@ -223,7 +223,7 @@
           "uses" : "actions/upload-artifact@master",
           "with" : {
             "name" : "krkrsdl2-win32-${{ matrix.platform.cmake-system-compiler }}",
-            "path" : "build/krkrsdl2.exe"
+            "path" : "build/krkrsdl2_repo/krkrsdl2.exe"
           }
         }
       ]
@@ -259,7 +259,7 @@
           "uses" : "actions/upload-artifact@master",
           "with" : {
             "name" : "krkrsdl2-vita",
-            "path" : "build/krkrsdl2.vpk"
+            "path" : "build/krkrsdl2_repo/krkrsdl2.vpk"
           }
         }
       ]
@@ -295,7 +295,7 @@
           "uses" : "actions/upload-artifact@master",
           "with" : {
             "name" : "krkrsdl2-switch",
-            "path" : "build/krkrsdl2.nro"
+            "path" : "build/krkrsdl2_repo/krkrsdl2.nro"
           }
         }
       ]
@@ -311,13 +311,13 @@
               "enabled" : "false",
               "cmakeflags" : "-DOPTION_BUILD_MACOS_BUNDLE=OFF",
               "artifactname" : "krkrsdl2-macos",
-              "artifactpath" : "build/krkrsdl2"
+              "artifactpath" : "build/krkrsdl2_repo/krkrsdl2"
             },
             {
               "enabled" : "true",
               "cmakeflags" : "-DOPTION_BUILD_MACOS_BUNDLE=ON -DEMBED_DATA_PATH=data.xp3",
               "artifactname" : "krkrsdl2-macos-appbundle",
-              "artifactpath" : "build/krkrsdl2-macos-appbundle.zip"
+              "artifactpath" : "build/krkrsdl2_repo/krkrsdl2-macos-appbundle.zip"
             }
           ]
         }
@@ -345,7 +345,7 @@
           "run" : "cmake --build build"
         },
         {
-          "run" : "ditto -ck --rsrc --sequesterRsrc --keepParent build/krkrsdl2.app build/krkrsdl2-macos-appbundle.zip",
+          "run" : "ditto -ck --rsrc --sequesterRsrc --keepParent build/krkrsdl2_repo/krkrsdl2.app build/krkrsdl2_repo/krkrsdl2-macos-appbundle.zip",
           "if" : "matrix.appbundle.enabled == 'true'"
         },
         {
@@ -382,13 +382,13 @@
           "run" : "cmake --build build"
         },
         {
-          "run" : "ditto -ck --rsrc --sequesterRsrc --keepParent build/Debug-iphoneos/krkrsdl2.app build/krkrsdl2-ios-appbundle.zip"
+          "run" : "ditto -ck --rsrc --sequesterRsrc --keepParent build/krkrsdl2_repo/Debug-iphoneos/krkrsdl2.app build/krkrsdl2_repo/krkrsdl2-ios-appbundle.zip"
         },
         {
           "uses" : "actions/upload-artifact@master",
           "with" : {
             "name" : "krkrsdl2-ios-appbundle",
-            "path" : "build/krkrsdl2-ios-appbundle.zip"
+            "path" : "build/krkrsdl2_repo/krkrsdl2-ios-appbundle.zip"
           }
         }
       ]

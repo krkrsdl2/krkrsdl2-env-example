@@ -13,6 +13,7 @@ option(BUILTIN_PLUGIN_ENABLE_JSON "Enable the json plugin." ON)
 option(BUILTIN_PLUGIN_ENABLE_VARFILE "Enable the varfile plugin." ON)
 option(BUILTIN_PLUGIN_ENABLE_KRGLHWEBP "Enable the krglhwebp plugin." ON)
 
+# Options can be passed to toe build system Kirikiri SDL2 using this method.
 set(OPTION_ENABLE_EXTERNAL_PLUGINS OFF)
 
 include(FetchContent)
@@ -32,6 +33,7 @@ if(NOT DEFINED KRKRSDL2_REPO_DIR)
 endif()
 add_subdirectory(${KRKRSDL2_REPO_DIR} ${CMAKE_CURRENT_BINARY_DIR}/krkrsdl2_repo)
 
+# Plugins can be statically linked to Kirikiri SDL2 using this method.
 FetchContent_Declare(
 	ncbind
 	GIT_REPOSITORY https://github.com/krkrsdl2/ncbind.git

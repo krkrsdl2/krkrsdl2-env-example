@@ -5,6 +5,7 @@ project(krkrsdl2_env)
 if (${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.13")
 cmake_policy(SET CMP0077 NEW)
 endif()
+option(BUILTIN_PLUGIN_ENABLE_KAGPARSER "Enable the KAGParser plugin." ON)
 option(BUILTIN_PLUGIN_ENABLE_EXTRANS "Enable the extrans plugin." ON)
 option(BUILTIN_PLUGIN_ENABLE_WUTCWF "Enable the wutcwf plugin." ON)
 option(BUILTIN_PLUGIN_ENABLE_WUVORBIS "Enable the wuvorbis plugin." ON)
@@ -56,6 +57,26 @@ list(TRANSFORM NCBIND_INCLUDES PREPEND ${NCBIND_SRC_DIR}/)
 list(APPEND KRKRSDL2_EXTRA_SRC ${NCBIND_SRC})
 list(APPEND KRKRSDL2_EXTRA_INCLUDES ${NCBIND_INCLUDES})
 
+if(${BUILTIN_PLUGIN_ENABLE_KAGPARSER})
+FetchContent_Declare(
+	kagparser
+	GIT_REPOSITORY https://github.com/krkrsdl2/KAGParser.git
+	GIT_TAG        origin/krkrsdl2
+)
+
+if(NOT DEFINED KAGPARSER_REPO_DIR)
+	FetchContent_GetProperties(kagparser)
+	if(NOT kagparser_POPULATED)
+		FetchContent_Populate(kagparser)
+		set(KAGPARSER_REPO_DIR ${kagparser_SOURCE_DIR} CACHE STRING "")
+	endif()
+endif()
+
+set(KAGPARSER_SRC_DIR ${KAGPARSER_REPO_DIR})
+file(STRINGS ${KAGPARSER_SRC_DIR}/src_list/sources.txt KAGPARSER_SRC)
+list(TRANSFORM KAGPARSER_SRC PREPEND ${KAGPARSER_SRC_DIR}/)
+list(APPEND KRKRSDL2_EXTRA_SRC ${KAGPARSER_SRC})
+endif()
 if(${BUILTIN_PLUGIN_ENABLE_EXTRANS})
 FetchContent_Declare(
 	extrans

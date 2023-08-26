@@ -223,27 +223,6 @@ list(TRANSFORM KRGLHWEBP_INCLUDES PREPEND ${KRGLHWEBP_SRC_DIR}/)
 list(APPEND KRKRSDL2_EXTRA_SRC ${KRGLHWEBP_SRC})
 list(APPEND KRKRSDL2_EXTRA_INCLUDES ${KRGLHWEBP_INCLUDES})
 endif()
-if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
-FetchContent_Declare(
-	kremscripten
-	GIT_REPOSITORY https://github.com/krkrsdl2/kremscripten.git
-	GIT_TAG        origin/main
-)
-
-if(NOT DEFINED KREMSCRIPTEN_REPO_DIR)
-	FetchContent_GetProperties(kremscripten)
-	if(NOT kremscripten_SOURCE_DIR)
-		FetchContent_Populate(kremscripten)
-		set(KREMSCRIPTEN_REPO_DIR ${kremscripten_SOURCE_DIR} CACHE STRING "")
-	endif()
-endif()
-
-set(KREMSCRIPTEN_SRC_DIR ${KREMSCRIPTEN_REPO_DIR}/src)
-file(STRINGS ${KREMSCRIPTEN_SRC_DIR}/src_list/sources.txt KRGLHWEBP_SRC)
-file(STRINGS ${KREMSCRIPTEN_SRC_DIR}/src_list/includes.txt KRGLHWEBP_INCLUDES)
-list(TRANSFORM KREMSCRIPTEN_SRC PREPEND ${KREMSCRIPTEN_SRC_DIR}/)
-list(APPEND KRKRSDL2_EXTRA_SRC ${KREMSCRIPTEN_SRC})
-endif()
 
 target_sources(${KRKRSDL2_NAME} PRIVATE ${KRKRSDL2_EXTRA_SRC})
 target_include_directories(${KRKRSDL2_NAME} PUBLIC ${KRKRSDL2_EXTRA_INCLUDES})

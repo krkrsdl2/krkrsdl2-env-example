@@ -355,12 +355,12 @@
         },
         {
           "name" : "Archive artifact (command line)",
-          "run" : "ditto -ck --rsrc --sequesterRsrc build/krkrsdl2 build/${{ github.event.repository.name }}-macos.zip",
+          "run" : "ditto -ck --rsrc --sequesterRsrc build/krkrsdl2_repo/krkrsdl2 build/${{ github.event.repository.name }}-macos.zip",
           "if" : "matrix.appbundle.enabled == 'false'"
         },
         {
           "name" : "Archive artifact (app bundle)",
-          "run" : "ditto -ck --rsrc --sequesterRsrc --keepParent build/krkrsdl2.app build/${{ github.event.repository.name }}-macos-appbundle.zip",
+          "run" : "ditto -ck --rsrc --sequesterRsrc --keepParent build/krkrsdl2_repo/krkrsdl2.app build/${{ github.event.repository.name }}-macos-appbundle.zip",
           "if" : "matrix.appbundle.enabled == 'true'"
         },
         {
